@@ -56,7 +56,7 @@
         <a href="index.html" class="logo d-flex align-items-center">
           <!-- Uncomment the line below if you also wish to use an image logo -->
           <!-- <img src="assets/img/logo2.avif"  alt="" style="width: 100px; height: 200px;" /> -->
-          <h1 class="sitename">RITIK</h1>
+          <h1 class="sitename">ER RITIK</h1>
           <!-- <h1 class="text-primary fw-bold mb-0">ER<span class="text-dark">Serv</span> </h1> -->
         </a>
 
@@ -543,10 +543,10 @@
               data-aos-delay="100"
             >
               <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-project1">Project 1</li>
-              <li data-filter=".filter-project2">Project 2</li>
-              <li data-filter=".filter-project3">Project 3</li>
-              <li data-filter=".filter-project4">Project 4</li>
+              <li data-filter=".filter-project1">P1</li>
+              <li data-filter=".filter-project2">P2</li>
+              <li data-filter=".filter-project3">P3</li>
+              <li data-filter=".filter-project4">P4</li>
             </ul>
             <!-- End Portfolio Filters -->
 
@@ -1205,71 +1205,63 @@
             </div>
           </div>
 
-    <form id="contact-form" action="index.html" class="php-email-form"  data-aos="fade-up" data-aos-delay="300">
-    <div class="row gy-4">
-      <div class="col-md-6">
-        <input type="text" name="name" class="form-control" placeholder="Your Name" required />
-      </div>
-
-      <div class="col-md-6">
-        <input type="email" name="email" class="form-control" placeholder="Your Email" required />
-      </div>
-
-      <div class="col-md-12">
-        <input type="text" name="subject" class="form-control" placeholder="Subject" required />
-      </div>
-
-      <div class="col-md-12">
-        <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
-      </div>
-
-      <div class="col-md-12 text-center">
-        <div class="loading">Loading</div>
-        <div class="error-message"></div>
-        <div class="sent-message">Your message has been sent. Thanks!</div>
-        <button type="submit">Send Message</button>
-      </div>
+<form id="contact-form" data-aos="fade-up" data-aos-delay="300">
+  <div class="row gy-4">
+    <div class="col-md-6">
+      <input type="text" name="name" class="form-control" placeholder="Your Name" required />
     </div>
-  </form>
+    <div class="col-md-6">
+      <input type="email" name="email" class="form-control" placeholder="Your Email" required />
+    </div>
+    <div class="col-md-12">
+      <input type="text" name="subject" class="form-control" placeholder="Subject" required />
+    </div>
+    <div class="col-md-12">
+      <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+    </div>
 
-  <!-- EmailJS CDN -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function(){
-      emailjs.init("Zk3dNpSjDxeC7VSPD"); // Public Key
-    })();
+    <div class="col-md-12 text-center">
+      <div class="loading" style="display: none;">Loading...</div>
+      <div class="error-message" style="display: none; background: #df1529; color: white; padding: 10px; margin-bottom: 10px;"></div>
+      <div class="sent-message" style="display: none; background: #059652; color: white; padding: 10px; margin-bottom: 10px;">Your message has been sent. Thanks!</div>
+      <button type="submit" class="btn btn-primary" style="background: #007bff; border: 0; padding: 10px 30px; color: #fff; border-radius: 50px;">Send Message <i class="bi bi-send"></i></button>
+    </div>
+  </div>
+</form>
 
-    const form = document.getElementById('contact-form');
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+  (function(){
+    emailjs.init("Zk3dNpSjDxeC7VSPD");
+  })();
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
+  const form = document.getElementById('contact-form');
 
-      document.querySelector('.loading').style.display = 'block';
+  form.addEventListener('submit', function(e) {
+    e.preventDefault(); // Stop default form submit
 
-      emailjs.sendForm(
-        'service_f60e00i',      // Service ID
-        'template_bn9tczk',     // Template ID
-        this                   // Form reference
-      ).then(
-        (result) => {
-          console.log('Email sent successfully:', result.text);
-          document.querySelector('.loading').style.display = 'none';
-          document.querySelector('.sent-message').style.display = 'block';
-          document.querySelector('.error-message').style.display = 'none';
-        },
-        (error) => {
-          console.error('Email sending failed:', error.text);
-          document.querySelector('.loading').style.display = 'none';
-          document.querySelector('.error-message').innerText = 'Failed to send message.';
-          document.querySelector('.error-message').style.display = 'none';
-          document.querySelector('.sent-message').style.display = 'none';
-        }
-      );
-    });
-  </script>
-<style>
-.loading, .sent-message, .error-message { display: none; }
-</style>  
+    const loading = document.querySelector('.loading');
+    const sentMsg = document.querySelector('.sent-message');
+    const errorMsg = document.querySelector('.error-message');
+
+    // Reset UI
+    loading.style.display = 'block';
+    sentMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
+
+    emailjs.sendForm('service_f60e00i', 'template_bn9tczk', this)
+      .then((result) => {
+        loading.style.display = 'none';
+        sentMsg.style.display = 'block';
+        this.reset(); // Clear all fields
+      }, (error) => {
+        loading.style.display = 'none';
+        errorMsg.innerText = 'Email sending failed: ' + error.text;
+        errorMsg.style.display = 'block';
+      });
+  });
+</script>
+
         <!-- End Contact Form -->
         </div>
       </section>
