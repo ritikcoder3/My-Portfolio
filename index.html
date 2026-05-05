@@ -1225,6 +1225,7 @@
             </div>
           </div>
 
+<!-- Contact Form -->
 <form id="contact-form" data-aos="fade-up" data-aos-delay="300">
   <div class="row gy-4">
     <div class="col-md-6">
@@ -1241,12 +1242,12 @@
     </div>
 
     <div class="col-md-12 text-center">
-     <div class="loading" style="display: none; margin-bottom: 10px;">
-  <div class="spinner-border text-primary" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-  <p>Sending...</p>
-</div>
+      <div class="loading" style="display: none; margin-bottom: 10px;">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <p>Sending...</p>
+      </div>
       <div class="error-message" style="display: none; background: #df1529; color: white; padding: 10px; margin-bottom: 10px;"></div>
       <div class="sent-message" style="display: none; background: #059652; color: white; padding: 10px; margin-bottom: 10px;">Your message has been sent. Thanks!</div>
       <button type="submit" class="btn btn-primary" style="background: #007bff; border: 0; padding: 10px 30px; color: #fff; border-radius: 50px;">Send Message <i class="bi bi-send"></i></button>
@@ -1254,16 +1255,17 @@
   </div>
 </form>
 
+<!-- EmailJS Script -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script type="text/javascript">
   (function(){
-    emailjs.init("Zk3dNpSjDxeC7VSPD");
+    emailjs.init("Zk3dNpSjDxeC7VSPD"); // Your Public Key
   })();
 
   const form = document.getElementById('contact-form');
 
   form.addEventListener('submit', function(e) {
-    e.preventDefault(); // Stop default form submit
+    e.preventDefault();
 
     const loading = document.querySelector('.loading');
     const sentMsg = document.querySelector('.sent-message');
@@ -1274,11 +1276,20 @@
     sentMsg.style.display = 'none';
     errorMsg.style.display = 'none';
 
+    // 1. Send notification to YOU (upper template)
     emailjs.sendForm('service_f60e00i', 'template_bn9tczk', this)
       .then((result) => {
-        loading.style.display = 'none';
-        sentMsg.style.display = 'block';
-        this.reset(); // Clear all fields
+        // 2. Send auto‑reply to VISITOR (lower template)
+        emailjs.send('service_f60e00i', 'template_ypg0j2v', {
+          name: form.name.value,
+          email: form.email.value,
+          subject: form.subject.value,
+          message: form.message.value
+        }).then(() => {
+          loading.style.display = 'none';
+          sentMsg.style.display = 'block';
+          form.reset();
+        });
       }, (error) => {
         loading.style.display = 'none';
         errorMsg.innerText = 'Email sending failed: ' + error.text;
@@ -1286,8 +1297,8 @@
       });
   });
 </script>
+<!-- End Contact Form -->
 
-        <!-- End Contact Form -->
         </div>
       </section>
       <!-- /Contact Section -->
