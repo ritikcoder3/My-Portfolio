@@ -42,8 +42,22 @@
     <!-- OR latest version (Font Awesome 6) -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+   <style>
+.img-fluid:hover {
+  box-shadow: 0 6px 10px lch(18.74% 84.5 304.67 / 0.3);
+}
 
+.form-control:focus {
+ box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  border-color: #007bff; /* optional: highlight border */
+  outline: none; /* removes default browser outline */
+}
 
+#send-message-btn:hover {
+  background: #0056b3; /* darker blue on hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4); /* stronger shadow on hover */
+}
+</style>
 
 
   </head>
@@ -1250,7 +1264,7 @@
       </div>
       <div class="error-message" style="display: none; background: #df1529; color: white; padding: 10px; margin-bottom: 10px;"></div>
       <div class="sent-message" style="display: none; background: #059652; color: white; padding: 10px; margin-bottom: 10px;">Your message has been sent. Thanks!</div>
-      <button type="submit" class="btn btn-primary" style="background: #007bff; border: 0; padding: 10px 30px; color: #fff; border-radius: 50px;">Send Message <i class="bi bi-send"></i></button>
+      <button type="submit" class="btn btn-primary" id="send-message-btn" style="background: #007bff; border: 0; padding: 10px 30px; color: #fff; border-radius: 50px;">Send Message <i class="bi bi-send"></i></button>
     </div>
   </div>
 </form>
